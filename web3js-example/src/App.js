@@ -30,9 +30,9 @@ function App() {
 
   // Create the LendingPoolAddressProvider contract instance
   function getLendingPoolAddressProviderContract() {
-		const lpAddressProviderAddress = "0x24a42fD28C976A61Df5D00D0599C34c4f90748c8" // mainnet address, for other addresses: https://docs.aave.com/developers/developing-on-aave/deployed-contract-instances
-		const lpAddressProviderContract = new web3.eth.Contract(LendingPoolAddressProviderABI, lpAddressProviderAddress)
-		return lpAddressProviderContract
+    const lpAddressProviderAddress = "0x24a42fD28C976A61Df5D00D0599C34c4f90748c8" // mainnet address, for other addresses: https://docs.aave.com/developers/developing-on-aave/deployed-contract-instances
+    const lpAddressProviderContract = new web3.eth.Contract(LendingPoolAddressProviderABI, lpAddressProviderAddress)
+    return lpAddressProviderContract
   }
 
   // Get the latest LendingPoolCore address
