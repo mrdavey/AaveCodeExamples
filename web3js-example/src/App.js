@@ -101,25 +101,25 @@ function App() {
    * Note: User must have already deposited some collateral to borrow
    */
   async function borrow() {
-		const daiAmountinWei = web3.utils.toWei("1000", "ether").toString()
-		const daiAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F" // mainnet DAI
-		const interestRateMode = 2 // variable rate
-		const referralCode = "0"
+    const daiAmountinWei = web3.utils.toWei("1000", "ether").toString()
+    const daiAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F" // mainnet DAI
+    const interestRateMode = 2 // variable rate
+    const referralCode = "0"
 
-		try {
-			// Make the borrow transaction via LendingPool contract
-			const lpAddress = await getLendingPoolAddress()
-			const lpContract = new web3.eth.Contract(LendingPoolABI, lpAddress)
-			await lpContract.methods
-				.borrow(daiAddress, daiAmountinWei, interestRateMode, referralCode)
-				.send({ from: myAddress })
-				.catch((e) => {
-					throw Error(`Error borrowing from the LendingPool contract: ${e.message}`)
-				})
-		} catch (e) {
-			alert(e.message)
-			console.log(e.message)
-		}
+    try {
+      // Make the borrow transaction via LendingPool contract
+      const lpAddress = await getLendingPoolAddress()
+      const lpContract = new web3.eth.Contract(LendingPoolABI, lpAddress)
+      await lpContract.methods
+        .borrow(daiAddress, daiAmountinWei, interestRateMode, referralCode)
+        .send({ from: myAddress })
+        .catch((e) => {
+          throw Error(`Error borrowing from the LendingPool contract: ${e.message}`)
+        })
+    } catch (e) {
+      alert(e.message)
+      console.log(e.message)
+    }
   }
 
   /**
@@ -127,50 +127,50 @@ function App() {
    * Note: User must have borrowed DAI
    */
   async function Repay() {
-		const daiAmountinWei = web3.utils.toWei("1000", "ether").toString()
-		const daiAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F" // mainnet DAI
+    const daiAmountinWei = web3.utils.toWei("1000", "ether").toString()
+    const daiAddress = "0x6B175474E89094C44Da98b954EedeAC495271d0F" // mainnet DAI
 
-		try {
-			// Repay via LendingPool contract
-			const lpAddress = await getLendingPoolAddress()
-			const lpContract = new web3.eth.Contract(LendingPoolABI, lpAddress)
-			await lpContract.methods
-				.repay(daiAddress, daiAmountinWei, myAddress)
-				.send({ from: myAddress })
-				.catch((e) => {
-					throw Error(`Error repaying in the LendingPool contract: ${e.message}`)
-				})
-		} catch (e) {
-			alert(e.message)
-			console.log(e.message)
-		}
+    try {
+      // Repay via LendingPool contract
+      const lpAddress = await getLendingPoolAddress()
+      const lpContract = new web3.eth.Contract(LendingPoolABI, lpAddress)
+      await lpContract.methods
+        .repay(daiAddress, daiAmountinWei, myAddress)
+        .send({ from: myAddress })
+        .catch((e) => {
+          throw Error(`Error repaying in the LendingPool contract: ${e.message}`)
+        })
+    } catch (e) {
+      alert(e.message)
+      console.log(e.message)
+    }
   }
 
   return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					See our{" "}
-					<a className="App-link" href="https://docs.aave.com/developers" target="_blank">
-						official developer docs
-					</a>{" "}
-					for more
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          See our{" "}
+          <a className="App-link" href="https://docs.aave.com/developers" target="_blank">
+            official developer docs
+          </a>{" "}
+          for more
         </p><p>
-					Web3 connected successfully with address:
-					<br />
-					{myAddress}
-				</p>
-				<p>
-					<button className="App-button" onClick={async () => await deposit()}>
-						Deposit
-					</button>
-					<button className="App-button" onClick={async () => await borrow()}>
-						Borrow
-					</button>
-				</p>
-			</header>
-		</div>
+          Web3 connected successfully with address:
+          <br />
+          {myAddress}
+        </p>
+        <p>
+          <button className="App-button" onClick={async () => await deposit()}>
+            Deposit
+          </button>
+          <button className="App-button" onClick={async () => await borrow()}>
+            Borrow
+          </button>
+        </p>
+      </header>
+    </div>
   )
 }
 
